@@ -38,7 +38,7 @@ infrastructure:
   _is_anonymous: false
   _block_type_slug: docker-container
 storage:
-  repository: https://github.com/khuyentran1401/prefect-docker
+  repository: https://github.com/ellacharmed/prefect-docker
   reference: master
   _block_document_id: 1806cf00-a5a6-4834-9d06-159d2b8ee72f
   _block_document_name: pytrends

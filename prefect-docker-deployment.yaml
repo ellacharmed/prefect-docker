@@ -5,11 +5,36 @@ name: google-trends-gh-docker
 description: null
 version: c77c003fb81669eab35a129f16e2bb90
 # The work queue that will handle this deployment's runs
-work_queue_name: test
-tags: []
+work_queue_name: default
+work_pool_name: default-agent-pool
+tags: 
+- test
 parameters: {}
 schedule: null
-infra_overrides: {}
+is_schedule_active: true
+infra_overrides:
+  env.EXTRA_PIP_PACKAGES: s3fs
+infrastructure:
+  type: docker-container
+  env: {}
+  labels: {}
+  name: null
+  command:
+  - python
+  - -m
+  - prefect.engine
+  image: prefecthq/prefect:2-latest
+  image_pull_policy: null
+  networks: []
+  network_mode: null
+  auto_remove: false
+  volumes: []
+  stream_output: true
+  memswap_limit: null
+  mem_limit: null
+  privileged: false
+  block_type_slug: docker-container
+  _block_type_slug: docker-container
 
 ###
 ### DO NOT EDIT BELOW THIS LINE
@@ -19,15 +44,12 @@ manifest_path: null
 infrastructure:
   type: docker-container
   env:
-    EXTRA_PIP_PACKAGES: datapane==0.15.1 plotly==5.10.0 prefect>=2.3.1 prefect_shell==0.1.1
+    EXTRA_PIP_PACKAGES: datapane==0.15.1 plotly==5.10.0 prefect>=2.3.2 prefect_shell==0.1.1
       pytrends==4.8.0
   labels: {}
   name: null
-  command:
-  - python
-  - -m
-  - prefect.engine
-  image: prefecthq/prefect:2.3.2-python3.9
+  command: null
+  image: ellacharmed/google-trends:first
   image_pull_policy: null
   image_registry: null
   networks: []
@@ -35,16 +57,23 @@ infrastructure:
   auto_remove: false
   volumes: []
   stream_output: true
-  _block_document_id: 77f47e0e-63c1-4fc4-a785-7750c22eb499
+  memswap_limit: null
+  mem_limit: null
+  privileged: false
+  _block_document_id: cec5d6f6-e20a-4b80-afe0-43ecb96bbab5
   _block_document_name: google-trends
   _is_anonymous: false
+  block_type_slug: docker-container
   _block_type_slug: docker-container
 storage:
-  repository: https://github.com/khuyentran1401/prefect-docker
+  repository: https://github.com/ellacharmed/prefect-docker
   reference: master
-  _block_document_id: 1806cf00-a5a6-4834-9d06-159d2b8ee72f
+  access_token: null
+  include_git_objects: true
+  _block_document_id: 0a9f014a-8aa1-4a0d-8bbf-a389a18c0120
   _block_document_name: pytrends
   _is_anonymous: false
+  block_type_slug: github
   _block_type_slug: github
 path: ''
 entrypoint: src/main.py:create_pytrends_report
@@ -55,14 +84,18 @@ parameter_openapi_schema:
     keyword:
       title: keyword
       default: COVID
+      position: 0
       type: string
     start_date:
       title: start_date
       default: '2020-01-01'
+      position: 1
       type: string
     num_countries:
       title: num_countries
       default: 10
+      position: 2
       type: integer
   required: null
   definitions: null
+timestamp: '2023-06-14T21:21:32.861710+00:00'
