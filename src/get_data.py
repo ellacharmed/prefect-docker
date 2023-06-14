@@ -2,7 +2,9 @@ from pytrends.request import TrendReq
 from prefect import flow, task
 import plotly.express as px
 import datapane as dp
+from prefect.filesystems import GitHub
 
+github_block = GitHub.load("pytrends")
 
 @task(retries=3, retry_delay_seconds=10)
 def get_pytrends(keyword: str):
