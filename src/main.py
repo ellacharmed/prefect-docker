@@ -3,7 +3,7 @@ from create_report import create_report
 from prefect import flow
 from prefect.filesystems import GitHub
 
-
+github_block = GitHub.load("pytrends")
 
 @flow(name="Create a Report for Google Trends")
 def create_pytrends_report(
@@ -15,5 +15,5 @@ def create_pytrends_report(
 
 
 if __name__ == "__main__":
-    github_block = GitHub.load("pytrends")
+
     create_pytrends_report()
