@@ -53,7 +53,7 @@ prefect deployment build src/main.py:create_pytrends_report \
     - **Type (Optional)**: Type of infrastructure
       - `docker-container`
     - **Image (Optional)**: Tag for the docker image
-      - `ellacharmed/google-trends:first`
+      - ~~`ellacharmed/google-trends:first`~~ (use default Prefect's Docker image)
     - **Stream Output**: If set, the output will be streamed from the container to the local standard output
       - ON
 
@@ -93,6 +93,7 @@ where:
 
 To execute flow runs from this deployment, start an agent that pulls work from the pool created in previous lesson:
 
+1. Start Docker Desktop
 1. `- prefect agent start -p 'zoompool'`
 1. Deployment menu - look for `google-trends-gh-docker` deployment -> drop down menu -> Quick Run
 
